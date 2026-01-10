@@ -9,8 +9,8 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        val settingsButtonBackId = findViewById<Button>(R.id.settings_button_back)
-    settingsButtonBackId.setOnClickListener {
+        val settingsButtonBackId = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.settings_button_back)
+    settingsButtonBackId.setNavigationOnClickListener{
         finish()
     }
     }

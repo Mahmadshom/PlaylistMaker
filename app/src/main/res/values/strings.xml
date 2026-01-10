@@ -7,7 +7,8 @@
     <string name="share_app" translatable="false">Поделиться приложением</string>
     <string name="dark_theme" translatable="false">Темная тема</string>
     <string name="write_support" translatable="false">Написать в поддержку</string>
-    <string name="page_search">Страница поиска</string>
-    <string name="media_library_string">Медиатека</string>
+    <string name="page_search" translatable="false">Страница поиска</string>
+    <string name="media_library_string" translatable="false">Медиатека</string>
+    <string name="user_agreement" translatable="false">Пользовательское соглашение</string>
 
 </resources>
