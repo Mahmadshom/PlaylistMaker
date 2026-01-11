@@ -6,13 +6,30 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+import com.example.playlistmaker.R.layout
 
 class MainActivity : AppCompatActivity(), View.OnClickListener{
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(layout.activity_main)
+
+        val rootViewMain = findViewById<View>(R.id.main_root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(rootViewMain) { view, insets ->
+            val statusBar = insets.getInsets(WindowInsetsCompat.Type.statusBars())
+            view.updatePadding(top = statusBar.top)
+            insets
+        }
+
+
         val buttonSearchId = findViewById<Button>(R.id.search_button)
         val mediaLibraryButtonId = findViewById<Button>(R.id.media_library_button)
         val settingsButtonId = findViewById<Button>(R.id.settings_button)
