@@ -10,5 +10,9 @@
     <string name="page_search" translatable="false">Страница поиска</string>
     <string name="media_library_string" translatable="false">Медиатека</string>
     <string name="user_agreement" translatable="false">Пользовательское соглашение</string>
-
+    <string name="text_share_app" translatable="false">Привет! Попробуй этот курс по андроид разработке: https://practicum.yandex.ru/android-developer/</string>
+    <string name="support_email" translatable="false">mahmadshom1712@yandex.ru</string>
+    <string name="support_subject" translatable="false">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
+    <string name="support_body" translatable="false">Спасибо разработчикам и разработчицам за крутое приложение!</string>
+    <string name="agreement_url" translatable="false">https://yandex.ru/legal/practicum_offer/ru/</string>
 </resources>
