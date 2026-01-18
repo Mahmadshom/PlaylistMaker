@@ -1,0 +1,53 @@
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        style="@style/LinearLayoutSettingsStyle"
+        android:id="@+id/settings_root"
+        >
+
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/settings_button_back"
+            app:contentInsetStartWithNavigation="2dp"
+            android:layout_marginTop="4dp"
+            app:navigationIcon="@drawable/icon_back"
+            app:title="@string/settings"
+
+            style="@style/ButtonSettingsStyle"
+
+            />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/theme_switch"
+            style="@style/ButtonSettingsStyle"
+            android:layout_marginTop="21dp"
+            android:text="@string/dark_theme"
+            app:thumbTint="#00D6C3">
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/share_app"
+            style="@style/ButtonSettingsStyle"
+            android:drawableEnd="@drawable/icon_share"
+            android:text="@string/share_app"
+
+
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/write_support_id"
+            android:layout_width="match_parent"
+            android:text="@string/write_support"
+            android:drawableEnd="@drawable/icon_support"
+            style="@style/ButtonSettingsStyle" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/arrow_forward_id"
+            android:drawableEnd="@drawable/icon_arrow_forward"
+            android:text="@string/user_agreement"
+            style="@style/ButtonSettingsStyle"/>
+
+    </LinearLayout>
