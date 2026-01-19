@@ -1,91 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:id="@+id/settings_root"
-    >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        style="@style/LinearLayoutSettingsStyle"
+        android:id="@+id/settings_root"
+        >
 
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/settings_button_back"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_gravity="center_vertical"
+            app:contentInsetStartWithNavigation="2dp"
             android:layout_marginTop="4dp"
-            android:textAllCaps="false"
-            app:backgroundTint="@color/white"
-            app:iconTint="@color/black"
             app:navigationIcon="@drawable/icon_back"
             app:title="@string/settings"
-            android:background="?attr/selectableItemBackground"
+
+            style="@style/ButtonSettingsStyle"
+
             />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
+            android:id="@+id/theme_switch"
+            style="@style/ButtonSettingsStyle"
             android:layout_marginTop="21dp"
-            android:paddingLeft="16dp"
             android:text="@string/dark_theme"
-            android:textColor="@color/black"
-            android:textSize="16sp"
             app:thumbTint="#00D6C3">
 
         </com.google.android.material.switchmaterial.SwitchMaterial>
 
         <com.google.android.material.textview.MaterialTextView
-            android:background="?attr/selectableItemBackground"
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
+            android:id="@+id/share_app"
+            style="@style/ButtonSettingsStyle"
             android:drawableEnd="@drawable/icon_share"
-            android:drawableTint="@color/grey"
-            android:gravity="start|center_vertical"
-            android:paddingLeft="16dp"
-            android:paddingEnd="16dp"
             android:text="@string/share_app"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
-            android:drawableEnd="@drawable/icon_support"
-            android:drawableTint="@color/grey"
-            android:gravity="start|center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="@string/write_support"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:background="?attr/selectableItemBackground"
+
             />
 
         <com.google.android.material.textview.MaterialTextView
-            android:background="?attr/selectableItemBackground"
+            android:id="@+id/write_support_id"
             android:layout_width="match_parent"
-            android:layout_height="61dp"
+            android:text="@string/write_support"
+            android:drawableEnd="@drawable/icon_support"
+            style="@style/ButtonSettingsStyle" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/arrow_forward_id"
             android:drawableEnd="@drawable/icon_arrow_forward"
-            android:drawableTint="@color/grey"
-            android:gravity="start|center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             android:text="@string/user_agreement"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            style="@style/ButtonSettingsStyle"/>
+
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
