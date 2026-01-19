@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/blue"
-    android:paddingBottom="20dp">
+    android:paddingBottom="20dp"
+    android:id="@+id/main_root">
 
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -42,25 +43,6 @@
         app:iconSize="15dp"
         app:iconTint="@color/black" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/settings_button"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/white"
-        android:foreground="?attr/selectableItemBackground"
-        android:text="@string/settings"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:cornerRadius="16dp"
-        app:icon="@drawable/icon_settings"
-        app:iconGravity="textStart"
-
-        app:iconSize="15dp"
-        app:iconTint="@color/black" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/media_library_button"
@@ -81,5 +63,27 @@
         app:iconPadding="5dp"
         app:iconSize="15dp"
         app:iconTint="@color/black" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/settings_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:backgroundTint="@color/white"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/settings"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:cornerRadius="16dp"
+        app:icon="@drawable/icon_settings"
+        app:iconGravity="textStart"
+
+        app:iconSize="15dp"
+        app:iconTint="@color/black" />
+
 
 </LinearLayout>
