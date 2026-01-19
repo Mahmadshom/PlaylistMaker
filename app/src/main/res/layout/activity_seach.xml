@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_activity_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SearchActivity">
-    <TextView
-        android:textSize="70sp"
-        android:gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="@string/page_search"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/search_button_back"
+        app:contentInsetStartWithNavigation="2dp"
+        android:layout_marginTop="4dp"
+        app:navigationIcon="@drawable/icon_back"
+        app:title="@string/search"
+        style="@style/ButtonSettingsStyle"
+        />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
+        <EditText
+            android:id="@+id/search_edit_textId"
+            android:autofillHints="AUTOFILL_HINT_NOT_APPLICABLE"
+            android:drawableStart="@drawable/search_icon_mini"
+            android:background="@drawable/bg_search_field"
+            android:hint="@string/search"
+            style="@style/ExitTextStyle"
+            />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+
+
+
+</LinearLayout>
