@@ -17,23 +17,37 @@
         app:title="@string/search"
         style="@style/ButtonSettingsStyle"
         />
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:layout_width="match_parent"
-        android:layout_height="65dp">
-        <EditText
-            android:id="@+id/search_edit_textId"
-            android:autofillHints="AUTOFILL_HINT_NOT_APPLICABLE"
-            android:drawableStart="@drawable/search_icon_mini"
-            android:background="@drawable/bg_search_field"
-            android:hint="@string/search"
-            style="@style/ExitTextStyle"
-            />
-
-    </com.google.android.material.appbar.MaterialToolbar>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    >
 
 
 
+    <EditText
+        android:id="@+id/search_edit_textId"
+        android:autofillHints="AUTOFILL_HINT_NOT_APPLICABLE"
+        android:drawableStart="@drawable/search_icon_mini"
+        android:background="@drawable/bg_search_field"
+        android:hint="@string/search"
+        style="@style/ExitTextStyle"
+        />
 
+    <ImageButton
+        android:id="@+id/button_clear_id"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end|center_vertical"
+        android:importantForAccessibility="no"
+        android:src="@drawable/clear_icon"
+        android:background="@color/clear_gray"
+        android:layout_marginEnd="12dp"
+        android:visibility="gone"
+        />
+
+
+</FrameLayout>
 
 </LinearLayout>
