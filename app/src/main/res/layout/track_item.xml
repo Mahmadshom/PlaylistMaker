@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+     <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:gravity="center_vertical">
+
+
+    <!-- Обложка трека -->
+
+        <ImageView
+            android:id="@+id/trackCover"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:scaleType="centerCrop"
+             />
+
+        <!-- Контейнер для текстов -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/trackName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="?attr/colorControlNormal"
+                android:textSize="16sp"
+                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/artistName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="?attr/colorControlNormal"
+                    android:textSize="11sp"
+                     />
+
+                <!-- Точка-разделитель (опционально по дизайну) -->
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="4dp"
+                    android:background="?attr/colorControlNormal" />
+
+                <TextView
+                    android:id="@+id/trackTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorControlNormal"
+                    android:textSize="11sp"
+                     />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Иконка стрелочки в конце (если есть в дизайне) -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/icon_arrow_forward" />
+
+    </LinearLayout>
