@@ -69,10 +69,11 @@ class SearchActivity : AppCompatActivity() {
         )
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
+
+
         // 3. Создаем адаптер и передаем в него список
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         val trackAdapter = TrackAdapter(trackList)
-
         recyclerView.adapter = trackAdapter
 
     }

@@ -18,11 +18,11 @@ class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         artistName.text = model.artistName
         trackTime.text = model.trackTime
 
-        Glide.with(itemView) // Используем itemView, как требует задание
+        Glide.with(itemView) //
             .load(model.artworkUrl100)
-            .placeholder(R.drawable.stab_icon) // Замените на ваш ресурс заглушки
-            .centerCrop() // Чтобы картинка заполнила квадрат
-            .transform(RoundedCorners(2)) // Скругление (число в пикселях)
+            .placeholder(R.drawable.placeholder_stab)
+            .centerCrop()
+            .transform(RoundedCorners(2))
             .into(trackCover)
     }
 }

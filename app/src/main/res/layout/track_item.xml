@@ -7,35 +7,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
+        android:paddingHorizontal="12dp"
         android:paddingVertical="8dp"
         android:gravity="center_vertical">
 
 
-    <!-- Обложка трека -->
+
 
         <ImageView
             android:id="@+id/trackCover"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:scaleType="centerCrop"
-             />
+            android:layout_marginStart="1dp"/>
 
-        <!-- Контейнер для текстов -->
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
             android:orientation="vertical">
 
             <TextView
+                style="@style/TrackItemStyle"
                 android:id="@+id/trackName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:textColor="?attr/colorControlNormal"
                 android:textSize="16sp"
                  />
 
@@ -51,12 +54,13 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:textColor="?attr/colorControlNormal"
+                    style="@style/TrackItemStyle"
                     android:textSize="11sp"
                      />
 
-                <!-- Точка-разделитель (опционально по дизайну) -->
+
                 <View
+                    style="@style/TrackItemViewStyle"
                     android:layout_width="2dp"
                     android:layout_height="2dp"
                     android:layout_gravity="center_vertical"
@@ -67,17 +71,20 @@
                     android:id="@+id/trackTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/colorControlNormal"
+                    style="@style/TrackItemStyle"
                     android:textSize="11sp"
                      />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Иконка стрелочки в конце (если есть в дизайне) -->
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/icon_arrow_forward" />
+
+    <ImageView
+        style="@style/TrackItemForwardStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/icon_arrow_forward" />
 
     </LinearLayout>
