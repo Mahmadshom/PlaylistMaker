@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/search_activity_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SearchActivity">
+    tools:context=".SearchActivity"
+    style="@style/SearchScreenStyle"
+
+    >
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/search_button_back"
-        app:contentInsetStartWithNavigation="2dp"
+        style="@style/ButtonSettingsStyle"
         android:layout_marginTop="4dp"
+        app:contentInsetStartWithNavigation="2dp"
         app:navigationIcon="@drawable/icon_back"
         app:title="@string/search"
-        style="@style/ButtonSettingsStyle"
+        android:paddingBottom="7dp"
+
         />
-<FrameLayout
+
+    <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingEnd="16dp"
@@ -32,13 +37,16 @@
         android:drawableStart="@drawable/search_icon_mini"
         android:background="@drawable/bg_search_field"
         android:hint="@string/search"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         style="@style/ExitTextStyle"
         />
 
     <ImageButton
         android:id="@+id/button_clear_id"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:layout_gravity="end|center_vertical"
         android:importantForAccessibility="no"
         android:src="@drawable/clear_icon"
@@ -49,5 +57,19 @@
 
 
 </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </FrameLayout>
 
 </LinearLayout>

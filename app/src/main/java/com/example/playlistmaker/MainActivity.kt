@@ -11,15 +11,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import androidx.recyclerview.widget.RecyclerView
 import com.example.playlistmaker.R.layout
 
 class MainActivity : AppCompatActivity(), View.OnClickListener{
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
-
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_main)
+
+
+
+
+
 
         val rootViewMain = findViewById<View>(R.id.main_root)
 
