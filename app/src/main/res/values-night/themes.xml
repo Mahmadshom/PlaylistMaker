@@ -85,5 +85,8 @@
     <style name="TrackItemForwardStyle">
         <item name="android:tint">@color/white</item>
     </style>
+    <style name="TrackNameStyle">
+        <item name="android:textColor">@color/white</item>
+    </style>
 
 </resources>

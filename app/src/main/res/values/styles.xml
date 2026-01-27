@@ -70,15 +70,18 @@
     </style>
 
     <style name="TrackItemStyle">
+        <item name="android:textColor">@color/grey</item>
+    </style>
+    <style name="TrackNameStyle">
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="TrackItemViewStyle">
-        <item name="android:background">@color/black</item>
+        <item name="android:background">@color/grey</item>
     </style>
 
     <style name="TrackItemForwardStyle">
-        <item name="android:tint">@color/black</item>
+        <item name="android:tint">@color/grey</item>
     </style>
 
 </resources>
