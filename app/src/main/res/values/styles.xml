@@ -107,4 +107,13 @@
         <item name="android:layout_height">120dp</item>
         <item name="backgroundTint">@color/black</item>
     </style>
+    <style name="ButtonClearStyle">
+        <item name="android:layout_width">38dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:layout_gravity">end|center_vertical</item>
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:background">@color/clear_gray</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:visibility">gone</item>
+    </style>
 </resources>

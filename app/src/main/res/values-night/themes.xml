@@ -111,5 +111,14 @@
         <item name="android:textSize">19sp</item>
         <item name="android:fontFamily">@font/ys_display_medium</item>
     </style>
-
+    <style name="ButtonClearStyle">
+        <item name="android:layout_width">38dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:layout_gravity">end|center_vertical</item>
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:background">@color/clear_gray</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:tint">@color/black</item>
+    </style>
 </resources>

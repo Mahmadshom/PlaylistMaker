@@ -27,16 +27,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var placeholderLayout: View
-    private val itunesBaseUrl = "https://itunes.apple.com"
+
+    companion object {
+        private const val ITUNES_BASE_URL = "https://itunes.apple.com"
+        private const val SEARCH_TEXT_KEY = "SEARCH_TEXT"
+    }
     private val retrofit = Retrofit.Builder()
-        .baseUrl(itunesBaseUrl)
+        .baseUrl(ITUNES_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val itunesService = retrofit.create(ITunesApi::class.java)
 
-    private val tracks = ArrayList<Track>()
+    private val tracks = mutableListOf<Track>()
     private val trackAdapter = TrackAdapter(tracks)
-
     private lateinit var searchEditText: EditText
     private lateinit var clearButton: ImageButton
     private lateinit var recyclerView: RecyclerView
@@ -111,10 +114,11 @@ class SearchActivity : AppCompatActivity() {
             itunesService.search(query).enqueue(object : Callback<TrackResponse> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(call: Call<TrackResponse>, response: Response<TrackResponse>) {
-                    if (response.code() == 200) {
+                    if (response.isSuccessful) {
                         tracks.clear()
-                        if (response.body()?.results?.isNotEmpty() == true) {
-                            tracks.addAll(response.body()?.results!!)
+                        val results = response.body()?.results
+                        if (!results.isNullOrEmpty()) {
+                            tracks.addAll(results)
                             trackAdapter.notifyDataSetChanged()
                             recyclerView.visibility = View.VISIBLE
                         } else {
@@ -162,11 +166,12 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString("SEARCH_TEXT", searchEditText.text.toString())
+        outState.putString(SEARCH_TEXT_KEY, searchEditText.text.toString())
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        searchEditText.setText(savedInstanceState.getString("SEARCH_TEXT"))
+        val saveText = savedInstanceState.getString(SEARCH_TEXT_KEY,"")
+        searchEditText.setText(saveText)
     }
 }

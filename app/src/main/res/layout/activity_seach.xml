@@ -45,15 +45,10 @@
 
     <ImageButton
         android:id="@+id/button_clear_id"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_gravity="end|center_vertical"
-        android:importantForAccessibility="no"
         android:src="@drawable/clear_icon"
-        android:background="@color/clear_gray"
-        android:layout_marginEnd="12dp"
-        android:visibility="gone"
-        />
+        style="@style/ButtonClearStyle"
+
+         />
 
 
 </FrameLayout>
