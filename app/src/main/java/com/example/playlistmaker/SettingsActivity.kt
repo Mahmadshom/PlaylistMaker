@@ -1,6 +1,8 @@
 package com.example.playlistmaker
 
 import android.annotation.SuppressLint
+import android.app.Application
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -21,6 +23,7 @@ import java.net.URI
 class SettingsActivity : AppCompatActivity() {
 
 
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
        enableEdgeToEdge()
@@ -29,7 +32,6 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         val rootView = findViewById<View>(R.id.settings_root)
-        val themeSwitch = findViewById<SwitchMaterial>(R.id.theme_switch)
         val shareApp = findViewById<View>(R.id.share_app)
         val writeSupport = findViewById<View>(R.id.write_support_id)
         val arrow_forward = findViewById<View>(R.id.arrow_forward_id)
@@ -70,15 +72,19 @@ class SettingsActivity : AppCompatActivity() {
 
         }
 
+        val sharedPreferences = getSharedPreferences("theme_setting_switch", Context.MODE_PRIVATE)
+        val themeSwitch = findViewById<SwitchMaterial>(R.id.themeSwitch)
 
-        themeSwitch.isChecked = AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
 
-        themeSwitch.setOnCheckedChangeListener {_,isChecked ->
-            if (isChecked){
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }else{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }}
+
+        themeSwitch.isChecked = sharedPreferences.getBoolean("darkTheme", false)
+
+
+        themeSwitch.setOnCheckedChangeListener {_, checked ->
+            (applicationContext as App).switchTheme(checked)
+
+            }
+
 
         ViewCompat.setOnApplyWindowInsetsListener(rootView) { view, insets ->
             val statusBar = insets.getInsets(WindowInsetsCompat.Type.statusBars())
