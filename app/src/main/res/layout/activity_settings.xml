@@ -19,7 +19,7 @@
             />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/theme_switch"
+            android:id="@+id/themeSwitch"
             style="@style/ButtonSettingsStyle"
             android:layout_marginTop="21dp"
             android:text="@string/dark_theme"
