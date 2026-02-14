@@ -18,4 +18,6 @@
     <string name="nothing_found" translatable="false">Нечего не нашлось</string>
     <string name="server_error" translatable="false">Проблемы со связью\n\nЗагрузка не удалась. Проверьте \n подключение к интернету</string>
     <string name="refresh" translatable="false">Обновить</string>
+    <string name="clear_History">Очистить историю</string>
+    <string name="search_you">Вы искали</string>
 </resources>
