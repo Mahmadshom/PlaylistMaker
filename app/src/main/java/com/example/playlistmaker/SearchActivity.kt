@@ -26,6 +26,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchActivity : AppCompatActivity() {
+
+    private lateinit var historyLayout: View
+    private lateinit var historyRecyclerView: RecyclerView
+    private lateinit var clearHistoryButton: Button
+    private lateinit var searchHistory: SearchHistory
+    private val historyTracks = mutableListOf<Track>()
+    private val historyAdapter = TrackAdapter(historyTracks)
+
     private lateinit var placeholderLayout: View
 
     companion object {
@@ -54,11 +62,12 @@ class SearchActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_seach)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.search_activity_id)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        val sharedPrefs = getSharedPreferences("playlist_maker_prefs", MODE_PRIVATE)
+        searchHistory = SearchHistory(sharedPrefs)
+
+        historyLayout = findViewById(R.id.history_layout)
+        historyRecyclerView = findViewById(R.id.historyRecyclerView)
+        clearHistoryButton = findViewById(R.id.clearHistoryButton)
 
         // Инициализация View
         placeholderLayout = findViewById(R.id.placeholder_layout)
@@ -68,7 +77,16 @@ class SearchActivity : AppCompatActivity() {
         placeholderMessage = findViewById(R.id.placeholderMessage)
         placeholderImage = findViewById(R.id.placeholderImage)
         refreshButton = findViewById(R.id.refreshButton)
-        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.search_button_back)
+
+
+
+
+
+
+
+
+        val toolbar =
+            findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.search_button_back)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = trackAdapter
@@ -79,31 +97,92 @@ class SearchActivity : AppCompatActivity() {
             searchEditText.setText("")
             tracks.clear()
             trackAdapter.notifyDataSetChanged()
-            hidePlaceholder() // Скрываем ошибки при очистке
+            hidePlaceholder()
             hideKeyboard()
+
+            val history = searchHistory.getHistory()
+            if (history.isNotEmpty()) {
+                historyTracks.clear()
+                historyTracks.addAll(history)
+                historyAdapter.notifyDataSetChanged()
+                historyLayout.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            }
+        }
+        searchEditText.setOnFocusChangeListener { _, hasFocus ->
+            val history = searchHistory.getHistory()
+            historyLayout.visibility =
+                if (hasFocus && searchEditText.text.isEmpty() && history.isNotEmpty()) {
+                    historyTracks.clear()
+                    historyTracks.addAll(history)
+                    historyAdapter.notifyDataSetChanged()
+                    historyLayout.visibility = View.VISIBLE
+                    recyclerView.visibility = View.GONE
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
         }
 
-        searchEditText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                search()
-                true
-            }
-            false
-        }
 
         val simpleTextWatcher = object : TextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 clearButton.visibility = if (s.isNullOrEmpty()) View.GONE else View.VISIBLE
+
+                val history = searchHistory.getHistory()
+                if (s.isNullOrEmpty() && searchEditText.hasFocus() && history.isNotEmpty()) {
+                    historyLayout.visibility = View.VISIBLE
+                    recyclerView.visibility = View.GONE
+                    placeholderLayout.visibility = View.GONE
+                } else {
+                    historyLayout.visibility = View.GONE
+                    // recyclerView покажем, когда придут результаты поиска
+                }
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun afterTextChanged(s: Editable?) {}
         }
+
+
+
         searchEditText.addTextChangedListener(simpleTextWatcher)
 
         // Кнопка "Обновить" при ошибке
         refreshButton.setOnClickListener {
             search()
         }
+
+
+
+        historyRecyclerView.adapter = historyAdapter
+
+        searchEditText.addTextChangedListener(simpleTextWatcher)
+        trackAdapter.onItemClickListener = { track ->
+            searchHistory.addTrack(track)
+            // Здесь позже добавишь переход на экран плеера
+        }
+        clearHistoryButton.setOnClickListener {
+            searchHistory.clearHistory()
+            historyTracks.clear()
+            historyAdapter.notifyDataSetChanged()
+            historyLayout.visibility = View.GONE
+        }
+
+        searchEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                search()
+                true
+            } else {
+                false
+            }}
+refreshButton.setOnClickListener { search() }
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.search_activity_id)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
     }
 
     private fun search() {
