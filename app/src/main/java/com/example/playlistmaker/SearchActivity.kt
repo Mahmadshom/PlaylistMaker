@@ -40,6 +40,7 @@ class SearchActivity : AppCompatActivity() {
         private const val ITUNES_BASE_URL = "https://itunes.apple.com"
         private const val SEARCH_TEXT_KEY = "SEARCH_TEXT"
     }
+
     private val retrofit = Retrofit.Builder()
         .baseUrl(ITUNES_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -68,8 +69,6 @@ class SearchActivity : AppCompatActivity() {
         historyLayout = findViewById(R.id.history_layout)
         historyRecyclerView = findViewById(R.id.historyRecyclerView)
         clearHistoryButton = findViewById(R.id.clearHistoryButton)
-
-        // Инициализация View
         placeholderLayout = findViewById(R.id.placeholder_layout)
         searchEditText = findViewById(R.id.search_edit_textId)
         clearButton = findViewById(R.id.button_clear_id)
@@ -77,21 +76,15 @@ class SearchActivity : AppCompatActivity() {
         placeholderMessage = findViewById(R.id.placeholderMessage)
         placeholderImage = findViewById(R.id.placeholderImage)
         refreshButton = findViewById(R.id.refreshButton)
-
-
-
-
-
-
-
-
-        val toolbar =
-            findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.search_button_back)
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.search_button_back)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = trackAdapter
 
         toolbar.setNavigationOnClickListener { finish() }
+
+
+
 
         clearButton.setOnClickListener {
             searchEditText.setText("")
@@ -99,29 +92,11 @@ class SearchActivity : AppCompatActivity() {
             trackAdapter.notifyDataSetChanged()
             hidePlaceholder()
             hideKeyboard()
-
-            val history = searchHistory.getHistory()
-            if (history.isNotEmpty()) {
-                historyTracks.clear()
-                historyTracks.addAll(history)
-                historyAdapter.notifyDataSetChanged()
-                historyLayout.visibility = View.VISIBLE
-                recyclerView.visibility = View.GONE
-            }
+            showHistory()
         }
+
         searchEditText.setOnFocusChangeListener { _, hasFocus ->
-            val history = searchHistory.getHistory()
-            historyLayout.visibility =
-                if (hasFocus && searchEditText.text.isEmpty() && history.isNotEmpty()) {
-                    historyTracks.clear()
-                    historyTracks.addAll(history)
-                    historyAdapter.notifyDataSetChanged()
-                    historyLayout.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
+            showHistory()
         }
 
 
@@ -129,23 +104,12 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 clearButton.visibility = if (s.isNullOrEmpty()) View.GONE else View.VISIBLE
 
-                val history = searchHistory.getHistory()
-                if (s.isNullOrEmpty() && searchEditText.hasFocus() && history.isNotEmpty()) {
-                    historyLayout.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
-                    placeholderLayout.visibility = View.GONE
-                } else {
-                    historyLayout.visibility = View.GONE
-                    // recyclerView покажем, когда придут результаты поиска
-                }
+                showHistory()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun afterTextChanged(s: Editable?) {}
         }
-
-
-
         searchEditText.addTextChangedListener(simpleTextWatcher)
 
         // Кнопка "Обновить" при ошибке
@@ -153,14 +117,10 @@ class SearchActivity : AppCompatActivity() {
             search()
         }
 
-
-
         historyRecyclerView.adapter = historyAdapter
-
-        searchEditText.addTextChangedListener(simpleTextWatcher)
         trackAdapter.onItemClickListener = { track ->
             searchHistory.addTrack(track)
-            // Здесь позже добавишь переход на экран плеера
+            // Здесь позже добавим переход на экран плеера
         }
         clearHistoryButton.setOnClickListener {
             searchHistory.clearHistory()
@@ -175,14 +135,28 @@ class SearchActivity : AppCompatActivity() {
                 true
             } else {
                 false
-            }}
-refreshButton.setOnClickListener { search() }
+            }
+        }
+        refreshButton.setOnClickListener { search() }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.search_activity_id)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+    }
+    fun showHistory() {
+        val history = searchHistory.getHistory()
+        if (searchEditText.hasFocus() && searchEditText.text.isEmpty() && history.isNotEmpty()) {
+            historyTracks.clear()
+            historyTracks.addAll(history)
+            historyAdapter.notifyDataSetChanged()
+            historyLayout.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+            placeholderLayout.visibility = View.GONE
+        } else {
+            historyLayout.visibility = View.GONE
+        }
     }
 
     private fun search() {
@@ -192,7 +166,10 @@ refreshButton.setOnClickListener { search() }
 
             itunesService.search(query).enqueue(object : Callback<TrackResponse> {
                 @SuppressLint("NotifyDataSetChanged")
-                override fun onResponse(call: Call<TrackResponse>, response: Response<TrackResponse>) {
+                override fun onResponse(
+                    call: Call<TrackResponse>,
+                    response: Response<TrackResponse>
+                ) {
                     if (response.isSuccessful) {
                         tracks.clear()
                         val results = response.body()?.results
@@ -202,17 +179,29 @@ refreshButton.setOnClickListener { search() }
                             recyclerView.visibility = View.VISIBLE
                         } else {
                             // Пустой результат
-                            showPlaceholder(getString(R.string.nothing_found), R.drawable.nothing_found_img, false)
+                            showPlaceholder(
+                                getString(R.string.nothing_found),
+                                R.drawable.nothing_found_img,
+                                false
+                            )
                         }
                     } else {
                         // Ошибка сервера
-                        showPlaceholder(getString(R.string.server_error), R.drawable.server_error_img, true)
+                        showPlaceholder(
+                            getString(R.string.server_error),
+                            R.drawable.server_error_img,
+                            true
+                        )
                     }
                 }
 
                 override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
                     // Ошибка сети
-                    showPlaceholder(getString(R.string.server_error), R.drawable.server_error_img, true)
+                    showPlaceholder(
+                        getString(R.string.server_error),
+                        R.drawable.server_error_img,
+                        true
+                    )
                 }
             })
         }
@@ -239,7 +228,8 @@ refreshButton.setOnClickListener { search() }
     }
 
     private fun hideKeyboard() {
-        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        val inputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         inputMethodManager?.hideSoftInputFromWindow(searchEditText.windowToken, 0)
     }
 
@@ -250,7 +240,7 @@ refreshButton.setOnClickListener { search() }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        val saveText = savedInstanceState.getString(SEARCH_TEXT_KEY,"")
+        val saveText = savedInstanceState.getString(SEARCH_TEXT_KEY, "")
         searchEditText.setText(saveText)
     }
 }

@@ -9,16 +9,18 @@ class SearchHistory(private val sharedPreferences: SharedPreferences) {
 
     private val gson = Gson()
 
+    val sizeLimit: Int = 10
+
     // Получить список треков из истории
-    fun getHistory(): MutableList<Track> {
-        val json = sharedPreferences.getString(SEARCH_HISTORY_KEY, null) ?: return mutableListOf()
-        val type = object : TypeToken<MutableList<Track>>() {}.type
+    fun getHistory(): List<Track> {
+        val json = sharedPreferences.getString(SEARCH_HISTORY_KEY, null) ?: return emptyList()
+        val type = object : TypeToken<List<Track>>() {}.type
         return gson.fromJson(json, type)
     }
 
     // Добавить трек в историю
     fun addTrack(track: Track) {
-        val history = getHistory()
+        val history = getHistory().toMutableList()
 
         // Удаляем трек, если он уже есть (чтобы не было дублей)
         history.removeIf { it.trackId == track.trackId }
@@ -27,8 +29,8 @@ class SearchHistory(private val sharedPreferences: SharedPreferences) {
         history.add(0, track)
 
         // Ограничиваем размер до 10
-        if (history.size > 10) {
-            history.removeAt(10)
+       if (history.size > sizeLimit) {
+            history.removeAt(sizeLimit)
         }
 
         saveHistory(history)
