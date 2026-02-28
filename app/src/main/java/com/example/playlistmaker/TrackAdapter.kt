@@ -18,6 +18,7 @@ class TrackAdapter(private val tracks: List<Track>) : RecyclerView.Adapter<Track
 
         holder.itemView.setOnClickListener {
             onItemClickListener?.invoke(track)
+
         }
     }
 

@@ -17,6 +17,10 @@
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
+            android:name=".PlayMedia"
+            android:exported="false"
+             />
+        <activity
             android:name=".MediaLibraryActivity"
             android:exported="false" />
         <activity

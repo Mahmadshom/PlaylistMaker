@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/play_media"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MediaLibraryActivity">
+
+        <!-- Кнопка назад -->
+        <ImageButton
+            android:id="@+id/btn_back"
+            style="@style/ButtonBackStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back"
+            android:src="@drawable/icon_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Обложка альбома -->
+
+        <!-- Название трека -->
+        <ImageView
+            android:id="@+id/img_album"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="24dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/album_image"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_back" />
+
+        <TextView
+            android:id="@+id/tv_track_name"
+            style="@style/TrackInfoStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Yesterday (Remastered 2009)"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_album" />
+
+        <!-- Исполнитель -->
+        <TextView
+            android:id="@+id/tv_artist"
+            style="@style/TrackInfoStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="8dp"
+            android:text="The Beatles"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_track_name"
+
+            />
+
+        <!-- Блок управления (Add, Play, Like) -->
+        <ImageButton
+            android:id="@+id/btn_add"
+            style="@style/ButtonControlStyle"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="add_al"
+            android:elevation="0dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/button_add"
+            android:stateListAnimator="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_play"
+            app:layout_constraintEnd_toStartOf="@+id/btn_play"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_play" />
+
+        <ImageButton
+            android:id="@+id/btn_play"
+            style="@style/ButtonBackStyle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="28dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="play"
+            android:elevation="0dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_play_circle"
+            android:stateListAnimator="@null"
+            app:layout_constraintEnd_toStartOf="@+id/btn_like"
+            app:layout_constraintStart_toEndOf="@+id/btn_add"
+            app:layout_constraintTop_toBottomOf="@+id/tv_artist" />
+
+        <ImageButton
+            android:id="@+id/btn_like"
+            style="@style/ButtonControlStyle"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Лайк"
+            android:elevation="0dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_favorite"
+            android:stateListAnimator="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_play"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_play"
+            app:layout_constraintTop_toTopOf="@+id/btn_play"
+
+            />
+
+        <!-- Информация (Таблица) -->
+
+        <TextView
+            android:id="@+id/time"
+            style="@style/TrackInfoStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="00:35"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_play"
+            app:layout_constraintStart_toStartOf="@+id/btn_play"
+            app:layout_constraintTop_toBottomOf="@+id/btn_play"
+
+            />
+
+        <LinearLayout
+            android:id="@+id/info_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time"
+            app:layout_constraintVertical_bias="0.0">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Длительность"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_duration_value"
+                    style="@style/TrackInfoStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="13sp"
+
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/album"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_collection_value"
+                    style="@style/TrackInfoStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="13sp"
+
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Year"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_year_value"
+                    style="@style/TrackInfoStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="13sp"
+
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Genre"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/genre_name"
+                    style="@style/TrackInfoStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="13sp"
+                    tools:ignore="RelativeOverlap"
+
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Сountry"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/country_name"
+                    style="@style/TrackInfoStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F0F0F0" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

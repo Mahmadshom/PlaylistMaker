@@ -2,6 +2,7 @@ package com.example.playlistmaker
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -24,8 +25,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.jvm.java
 
 class SearchActivity : AppCompatActivity() {
+
 
     private lateinit var historyLayout: View
     private lateinit var historyRecyclerView: RecyclerView
@@ -76,7 +79,8 @@ class SearchActivity : AppCompatActivity() {
         placeholderMessage = findViewById(R.id.placeholderMessage)
         placeholderImage = findViewById(R.id.placeholderImage)
         refreshButton = findViewById(R.id.refreshButton)
-        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.search_button_back)
+        val toolbar =
+            findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.search_button_back)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = trackAdapter
@@ -118,9 +122,21 @@ class SearchActivity : AppCompatActivity() {
         }
 
         historyRecyclerView.adapter = historyAdapter
+
+
+        historyAdapter.onItemClickListener = { track ->
+            // При нажатии на элемент истории просто переходим в плеер
+            val intent = Intent(this, PlayMedia::class.java)
+            intent.putExtra("selected_track", track)
+            startActivity(intent)
+        }
+
         trackAdapter.onItemClickListener = { track ->
             searchHistory.addTrack(track)
             // Здесь позже добавим переход на экран плеера
+            val intent = Intent(this, PlayMedia::class.java)
+            intent.putExtra("selected_track", track)
+            startActivity(intent)
         }
         clearHistoryButton.setOnClickListener {
             searchHistory.clearHistory()
@@ -145,6 +161,7 @@ class SearchActivity : AppCompatActivity() {
         }
 
     }
+
     fun showHistory() {
         val history = searchHistory.getHistory()
         if (searchEditText.hasFocus() && searchEditText.text.isEmpty() && history.isNotEmpty()) {
