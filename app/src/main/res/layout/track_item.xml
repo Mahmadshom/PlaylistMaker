@@ -47,9 +47,10 @@
 
                 <TextView
                     android:id="@+id/artistName"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:maxWidth="150dp"
                     android:singleLine="true"
                     style="@style/TrackItemStyle"
                     android:textSize="11sp"
