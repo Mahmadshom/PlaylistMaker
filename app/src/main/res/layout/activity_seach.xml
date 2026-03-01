@@ -37,9 +37,9 @@
         android:drawableStart="@drawable/search_icon_mini"
         android:background="@drawable/bg_search_field"
         android:hint="@string/search"
-
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:textCursorDrawable="@drawable/cursor_icon"
         style="@style/ExitTextStyle"
         />
 

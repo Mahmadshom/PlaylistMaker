@@ -185,6 +185,7 @@
                 android:paddingVertical="8dp">
 
                 <TextView
+                    android:id="@+id/tv_collection_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/album"
@@ -194,12 +195,16 @@
                 <TextView
                     android:id="@+id/tv_collection_value"
                     style="@style/TrackInfoStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:textSize="13sp"
-
-                    />
+                    android:layout_toEndOf="@id/tv_collection_label"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textAlignment="viewEnd"
+                />
             </RelativeLayout>
 
             <RelativeLayout

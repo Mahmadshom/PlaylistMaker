@@ -48,12 +48,16 @@ class PlayMedia : AppCompatActivity() {
         trackName.text = track.trackName
         artistName.text = track.artistName
         collectionName.text = track.collectionName
-        releaseDate.text = track.releaseDate
         genreName.text = track.primaryGenreName
         countryName.text = track.country
 // Для времени используй SimpleDateFormat ("mm:ss")
         duration.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
         durationTotal.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
+        if (track.releaseDate != null && track.releaseDate.length >= 4) {
+            releaseDate.text = track.releaseDate.substring(0, 4)
+        } else {
+            releaseDate.text = ""
+        }
 
 
 
