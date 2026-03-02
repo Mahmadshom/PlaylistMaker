@@ -37,9 +37,9 @@
         android:drawableStart="@drawable/search_icon_mini"
         android:background="@drawable/bg_search_field"
         android:hint="@string/search"
-
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:textCursorDrawable="@drawable/cursor_icon"
         style="@style/ExitTextStyle"
         />
 
@@ -59,17 +59,19 @@
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"
         >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <LinearLayout
             android:id="@+id/placeholder_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-android:layout_marginTop="89dp"
-
-
+            android:layout_marginTop="89dp"
             android:gravity="center"
             android:orientation="vertical"
-
             android:visibility="gone"
             tools:visibility="visible">
 
@@ -95,11 +97,44 @@ android:layout_marginTop="89dp"
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <LinearLayout
+            android:id="@+id/history_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:background="?android:windowBackground">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/search_you"
+                android:gravity="center"
+                android:layout_marginTop="24dp"
+                android:textSize="19sp"
+                android:layout_marginBottom="12dp"
+                style="@style/NothingFoundStyle" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/historyRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <Button
+                android:text="@string/clear_History"
+                android:id="@+id/clearHistoryButton"
+                 style="@style/ClearHistoryStyle"
+
+                />
+        </LinearLayout>
+
+
     </FrameLayout>
 
 </LinearLayout>

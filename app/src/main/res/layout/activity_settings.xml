@@ -9,17 +9,16 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/settings_button_back"
-            app:contentInsetStartWithNavigation="2dp"
+            style="@style/ButtonSettingsStyle"
             android:layout_marginTop="4dp"
+            app:contentInsetStartWithNavigation="2dp"
             app:navigationIcon="@drawable/icon_back"
             app:title="@string/settings"
-
-            style="@style/ButtonSettingsStyle"
 
             />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/theme_switch"
+            android:id="@+id/themeSwitch"
             style="@style/ButtonSettingsStyle"
             android:layout_marginTop="21dp"
             android:text="@string/dark_theme"

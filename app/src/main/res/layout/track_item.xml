@@ -40,7 +40,7 @@
                  />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
@@ -50,9 +50,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:maxWidth="150dp"
                     android:singleLine="true"
                     style="@style/TrackItemStyle"
                     android:textSize="11sp"
+                    android:layout_weight="1"
                      />
 
 
