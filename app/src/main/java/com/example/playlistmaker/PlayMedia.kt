@@ -107,7 +107,7 @@ class PlayMedia : AppCompatActivity() {
         }
     }
       private  fun preparePlayer(url: String?) {
-          if (url.isNullOrEmpty()) return
+          if (url.isNullOrEmpty()){ return}
             mediaPlayer.setDataSource(url)
             mediaPlayer.prepareAsync()
             mediaPlayer.setOnPreparedListener {
